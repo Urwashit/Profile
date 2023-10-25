@@ -1,15 +1,18 @@
-<mat-toolbar color="primary">
-  <span>
-    <button mat-stroked-button routerLink="/">{{ title }}</button>
-  </span>
-  <div>
-    <button mat-stroked-button routerLink="/login" *ngIf="!isAuthenticated">
-      Login
-    </button>
-    <button mat-stroked-button *ngIf="isAuthenticated" (click)="logout()">
-      Logout
-    </button>
-  </div>
-</mat-toolbar>
+<p>
+  <mat-toolbar color="primary" class="fixed-header">
+    <mat-toolbar-row>
+      <span routerLink="/profile">Profile</span>
+      <span class="menu-spacer"></span>
+      <div class="nav-button">
+        <button mat-stroked-button routerLink="/login" *ngIf="!isAuthenticated">
+          Login
+        </button>
+        <button mat-stroked-button *ngIf="isAuthenticated" (click)="logout()">
+          Logout
+        </button>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</p>
 
 <router-outlet></router-outlet>

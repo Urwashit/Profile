@@ -1,0 +1,20 @@
+<div class="card-box">
+  <mat-card *ngIf="!userdetail">
+    <mat-card-content>Loading data !!!</mat-card-content>
+  </mat-card>
+</div>
+<div class="card-box">
+  <mat-card *ngIf="userdetail">
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item>Name : {{ userdetail.name }}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Email : {{ userdetail.email }}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Mobile No. : {{ userdetail.phoneNo }}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Address : {{ userdetail.address }}</mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</div>

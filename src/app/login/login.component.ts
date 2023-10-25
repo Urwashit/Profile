@@ -30,6 +30,10 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.intializeForm();
+  }
+
+  intializeForm() {
     this.form = this.fb.group({
       email: [
         null,
@@ -71,7 +75,8 @@ export class LoginComponent implements OnInit {
           this.localStorageService.saveItem("userId", res.user._id);
           this.localStorageService.saveItem("token", res.accessToken);
           this.apiService.onRefresh();
-          this.router.navigate(["/appointment"]);
+          console.log("singup successfull");
+          this.router.navigate(["/profile"]);
         },
         (error: any) => {
           this.form.reset();
@@ -90,19 +95,18 @@ export class LoginComponent implements OnInit {
     ) {
       if (this.form.valid) {
         let loginModel = Object.assign({}, this.form.value);
-        this.apiService.login(loginModel).subscribe(
-          (res: any) => {
+        this.apiService.login(loginModel).subscribe({
+          next: (res: any) => {
             this.localStorageService.saveItem("token", res.accessToken);
             this.localStorageService.saveItem("userId", res.user._id);
-
             this.apiService.onRefresh();
-            this.router.navigate(["/appointment"]);
+            console.log("singup successfull");
+            this.router.navigate(["/profile"]);
           },
-          (error: any) => {
+          error: (error: any) => {
             this.form.reset();
           },
-          () => {}
-        );
+        });
       }
     }
   }

@@ -14,14 +14,12 @@ mat-tab {
 .login-card mat-card-title {
     margin: 0 0 30px;
     padding: 0;
-    /* color: #fff; */
     text-align: center;
 }
 
 .signup-card mat-card-title {
     margin: 0 0 30px;
     padding: 0;
-    /* color: #fff; */
     text-align: center;
 }
 
