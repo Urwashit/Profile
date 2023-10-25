@@ -1,0 +1,35 @@
+mat-tab {
+    color: blue;
+}
+
+.tab-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 16px;
+    padding: 16px;
+    border-radius: 8px;
+}
+
+.login-card mat-card-title {
+    margin: 0 0 30px;
+    padding: 0;
+    /* color: #fff; */
+    text-align: center;
+}
+
+.signup-card mat-card-title {
+    margin: 0 0 30px;
+    padding: 0;
+    /* color: #fff; */
+    text-align: center;
+}
+
+.signup-card mat-form-field {
+    inline-size: -webkit-fill-available;
+}
+
+button {
+    margin-left: 5px;
+    margin-right: 5px;
+}
