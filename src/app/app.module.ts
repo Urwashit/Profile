@@ -20,6 +20,7 @@ import { MatListModule } from "@angular/material/list";
 import { LoginComponent } from "./login/login.component";
 import { AppComponent } from "./app.component";
 import { ProfileComponent } from "./profile/profile.component";
+import { StoreModule } from '@ngrx/store';
 
 const materialModule = [
   MatIconModule,
@@ -43,6 +44,7 @@ const materialModule = [
     materialModule,
     HttpClientModule,
     CommonModule,
+    StoreModule.forRoot({}, {}),
   ],
   providers: [],
   bootstrap: [AppComponent],
