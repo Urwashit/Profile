@@ -10,7 +10,7 @@ import { LocalStorageService } from "./local-storage.service";
   providedIn: "root",
 })
 export class ApiService {
-  apiUrl = "http://localhost:3000/";
+  apiUrl = "https://backend-9orv.onrender.com/";
   headers: HttpHeaders = new HttpHeaders({
     Authorization: `Bearer ${this.localStorageService.getItem("token")}`,
   });
