@@ -111,6 +111,7 @@ export class LoginComponent implements OnInit {
             this.router.navigate(["/profile"]);
           },
           error: (error: any) => {
+            this.openSnackBar(error.error.error, "Refresh");
             this.form.reset();
           },
         });
