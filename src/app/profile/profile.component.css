@@ -1,8 +1,14 @@
-.card-box {
+.example-card {
+    max-width: 400px;
+}
+
+.example-header-image {
+    background-image: url('https://e7.pngegg.com/pngimages/550/997/png-clipart-user-icon-foreigners-avatar-child-face.png');
+    background-size: cover;
+}
+
+.container {
+    margin-top: 10%;
     display: flex;
-    align-items: center;
     justify-content: center;
-    margin: 16px;
-    padding: 16px;
-    border-radius: 8px;
 }

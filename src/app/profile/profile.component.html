@@ -3,6 +3,49 @@
     <mat-card-content>Loading data !!!</mat-card-content>
   </mat-card>
 </div>
+<div
+  fxLayout="row wrap"
+  fxLayout.xs="column"
+  fxLayoutAlign="space-around center"
+  fxLayoutGap="25px"
+  class="container"
+  *ngIf="userdetail"
+>
+  <mat-card
+    fxFlex="calc(33%-25px)"
+    fxFlex.sm="calc(50%-25px)"
+    class="example-card"
+  >
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{ userdetail.name }}</mat-card-title>
+      <mat-card-subtitle>{{ userdetail.email }}</mat-card-subtitle>
+    </mat-card-header>
+    <img
+      mat-card-image
+      src="https://e7.pngegg.com/pngimages/550/997/png-clipart-user-icon-foreigners-avatar-child-face.png"
+      alt="Photo of a Shiba Inu"
+    />
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item>User Id : {{ userdetail._id }}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Name : {{ userdetail.name }}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Email : {{ userdetail.email }}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Mobile No. : {{ userdetail.phoneNo }}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Address : {{ userdetail.address }}</mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</div>
+<!-- <div class="card-box">
+  <mat-card *ngIf="!userdetail">
+    <mat-card-content>Loading data !!!</mat-card-content>
+  </mat-card>
+</div>
 <div class="card-box">
   <mat-card *ngIf="userdetail">
     <mat-card-content>
@@ -17,4 +60,4 @@
       </mat-list>
     </mat-card-content>
   </mat-card>
-</div>
+</div> -->

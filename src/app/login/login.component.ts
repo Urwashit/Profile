@@ -6,9 +6,11 @@ import {
   Validators,
 } from "@angular/forms";
 import { FloatLabelType } from "@angular/material/form-field";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
 import { ApiService } from "../services/api.service";
 import { LocalStorageService } from "../services/local-storage.service";
+import { SharedService } from "../services/shared.service";
 
 @Component({
   selector: "app-login",
@@ -26,7 +28,9 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private localStorageService: LocalStorageService,
     private apiService: ApiService,
-    private router: Router
+    private router: Router,
+    private sharedService: SharedService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -58,12 +62,13 @@ export class LoginComponent implements OnInit {
           ),
         ],
       ],
-      mobile: [
+      phoneNo: [
         null,
         [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")],
       ],
       username: [null, [Validators.required]],
       password: [null, [Validators.required, Validators.minLength(8)]],
+      address: [null, [Validators.required]],
     });
   }
 
@@ -73,15 +78,16 @@ export class LoginComponent implements OnInit {
       this.apiService.signup(signupModel).subscribe(
         (res: any) => {
           this.localStorageService.saveItem("userId", res.user._id);
+          this.sharedService.setuser(res.user._id);
           this.localStorageService.saveItem("token", res.accessToken);
           this.apiService.onRefresh();
-          console.log("singup successfull");
+          this.sharedService.setValue(true);
           this.router.navigate(["/profile"]);
         },
         (error: any) => {
+          this.openSnackBar(error.error.error, "Refresh");
           this.form.reset();
-        },
-        () => {}
+        }
       );
     }
   }
@@ -99,8 +105,9 @@ export class LoginComponent implements OnInit {
           next: (res: any) => {
             this.localStorageService.saveItem("token", res.accessToken);
             this.localStorageService.saveItem("userId", res.user._id);
-            this.apiService.onRefresh();
-            console.log("singup successfull");
+            this.sharedService.setuser(res.user._id);
+            this.sharedService.setValue(true);
+            // this.apiService.onRefresh();
             this.router.navigate(["/profile"]);
           },
           error: (error: any) => {
@@ -109,5 +116,13 @@ export class LoginComponent implements OnInit {
         });
       }
     }
+  }
+
+  openSnackBar(message: string, action: string) {
+    let snackBarRef = this.snackBar.open(message, action);
+
+    snackBarRef.afterDismissed().subscribe(() => {
+      this.router.navigate(["/login"]);
+    });
   }
 }

@@ -1,7 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { Subscription } from "rxjs";
 import { UserDb } from "../models/user";
 import { ApiService } from "../services/api.service";
+import { LocalStorageService } from "../services/local-storage.service";
+import { SharedService } from "../services/shared.service";
 
 @Component({
   selector: "app-profile",
@@ -10,22 +13,34 @@ import { ApiService } from "../services/api.service";
 })
 export class ProfileComponent implements OnInit {
   userdetail!: UserDb;
+  subscription!: Subscription;
+  userId: any;
 
-  constructor(private apiService: ApiService, private router: Router) {}
+  constructor(
+    private apiService: ApiService,
+    private sharedService: SharedService,
+    private router: Router,
+    private localStorageService: LocalStorageService
+  ) {}
 
   ngOnInit(): void {
-    this.apiService.getUser("6538a188247ebf0cba9e507f").subscribe({
+    this.sharedService._userId.subscribe(
+      (res) => {
+        this.userId = res;
+        this.getUser(this.userId);
+      },
+      (error) => {
+        this.userId = this.localStorageService.getItem("userId");
+      }
+    );
+  }
+
+  getUser(userId: string) {
+    this.apiService.getUser(userId).subscribe({
       next: (res) => {
-        console.log(res);
         this.userdetail = res;
       },
-      error: (error) => {
-        console.log(error);
-        if (error.status === 410) {
-          this.apiService.logout();
-          this.router.navigate(["/login"]);
-        }
-      },
+      error: (error) => {},
     });
   }
 }
